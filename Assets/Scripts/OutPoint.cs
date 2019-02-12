@@ -37,6 +37,7 @@ public class OutPoint : CircuitElement
         if (Out != null)
         {
             Out.CircuitChanged();
+            _lineRenderer.startColor = _lineRenderer.endColor = value == 1 ? Color.red : Color.blue;
         }
     }
 

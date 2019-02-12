@@ -22,12 +22,17 @@ public class CircuitManager : MonoBehaviour
     public GameObject EditableOut;
     public GameObject Splitter;
     public GameObject Button;
-    public GameObject Nand;
+    public GameObject Nand2;
+    public GameObject Nand3;
     public GameObject Nor;
     public GameObject Equal;
     public GameObject Repeater;
     public GameObject Xor;
     public GameObject RS;
+    public GameObject LogicState;
+    public GameObject Clock;
+    public GameObject JKFF;
+    public GameObject Digital;
 
     public Transform elements_parent;
     public Text play_text;
@@ -300,13 +305,18 @@ public class CircuitManager : MonoBehaviour
     {
         byte v = 0;
         byte.TryParse(value, out v);
-        v = (byte)Mathf.Clamp01(v);
-        InputField.text = v.ToString();
 
         if (selected is EditableOut)
         {
+            v = (byte)Mathf.Clamp01(v);
             (selected as EditableOut).value = v;
         }
+        else if (selected is Clock)
+        {
+            (selected as Clock).Frequency = v;
+        }
+
+        InputField.text = v.ToString();
     }
 
     public void Delete()
@@ -356,7 +366,7 @@ public class CircuitManager : MonoBehaviour
                 go = Instantiate(Button, elements_parent);
                 break;
             case 7:
-                go = Instantiate(Nand, elements_parent);
+                go = Instantiate(Nand2, elements_parent);
                 break;
             case 8:
                 go = Instantiate(Nor, elements_parent);
@@ -372,6 +382,21 @@ public class CircuitManager : MonoBehaviour
                 break;
             case 12:
                 go = Instantiate(RS, elements_parent);
+                break;
+            case 13:
+                go = Instantiate(LogicState, elements_parent);
+                break;
+            case 14:
+                go = Instantiate(Clock, elements_parent);
+                break;
+            case 15:
+                go = Instantiate(Nand3, elements_parent);
+                break;
+            case 16:
+                go = Instantiate(JKFF, elements_parent);
+                break;
+            case 17:
+                go = Instantiate(Digital, elements_parent);
                 break;
             default:
                 go = Instantiate(EditableOut, elements_parent);
